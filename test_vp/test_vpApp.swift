@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct test_vpApp: App {
+    
     var body: some Scene {
-        WindowGroup {
+        
+        WindowGroup() {
             ContentView()
         }
+
     }
+    
 }
+
+

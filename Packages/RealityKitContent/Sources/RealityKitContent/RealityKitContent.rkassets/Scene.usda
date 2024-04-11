@@ -7,53 +7,131 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["GridMaterial", "Sphere"]
+    reorder nameChildren = ["GridMaterial", "Material", "Rainbow", "PBR_rainbow", "Cube", "Sphere"]
     rel material:binding = None (
         bindMaterialAs = "weakerThanDescendants"
     )
 
-    def Sphere "Sphere" (
+    def Cube "Cube" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
-        rel material:binding = </Root/GridMaterial/GridMaterial> (
+        rel material:binding = </Root/PBR_rainbow> (
             bindMaterialAs = "weakerThanDescendants"
         )
-        double radius = 0.05
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0, 0.0004)
+        double size = 0.2
+        float3 xformOp:scale = (1, 0.01, 1)
+        float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-        def RealityKitComponent "Collider"
+        def Material "DefaultMaterial"
         {
-            uint group = 1
-            uniform token info:id = "RealityKit.Collider"
-            uint mask = 4294967295
-            token type = "Default"
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            prepend token outputs:surface.connect = </Root/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 109.5)
+            float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 99)
 
-            def RealityKitStruct "Shape"
+            def Shader "DefaultSurfaceShader"
             {
-                float3 extent = (0.2, 0.2, 0.2)
-                float radius = 0.05
-                token shapeType = "Sphere"
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
             }
-        }
-
-        def RealityKitComponent "InputTarget"
-        {
-            uniform token info:id = "RealityKit.InputTarget"
         }
     }
 
-    def "GridMaterial" (
-        active = true
-        prepend references = @Materials/GridMaterial.usda@
-    )
+    def Material "PBR_rainbow"
     {
-        float3 xformOp:scale = (1, 1, 1)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        token inputs:frame:stPrimvarName = "st" (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (-115.25, 86.5)
+                    float2 sizeInSubgraph = (203.5, 53)
+                }
+            }
+        )
+        token outputs:mtlx:surface
+        token outputs:realitykit:vertex
+        prepend token outputs:surface.connect = </Root/PBR_rainbow/UsdPreviewSurface.outputs:surface>
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (126.25, 109.5)
+        float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 99)
+
+        def Shader "UsdPreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor.connect = </Root/PBR_rainbow/diffuseColor.outputs:rgb>
+            color3f inputs:emissiveColor = (1, 1, 1) (
+                colorSpace = "lin_srgb"
+            )
+            float inputs:opacity = 1
+            float inputs:opacity.connect = </Root/PBR_rainbow/opacity.outputs:r>
+            float inputs:opacityThreshold
+            float inputs:roughness = 1
+            token outputs:surface
+        }
+
+        def Shader "diffuseColor"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @Materials/rainbow.png@
+            float2 inputs:st.connect = </Root/PBR_rainbow/diffuseColor/TexCoordReader.outputs:result>
+            color3f outputs:rgb
+
+            def Shader "TexCoordReader"
+            {
+                uniform token info:id = "UsdPrimvarReader_float2"
+                token inputs:varname.connect = </Root/PBR_rainbow/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                float2 outputs:result
+            }
+        }
+
+        def Shader "opacityThreshold"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @Materials/rainbow.png@
+            float2 inputs:st.connect = </Root/PBR_rainbow/opacityThreshold/TexCoordReader.outputs:result>
+            float outputs:r
+
+            def Shader "TexCoordReader"
+            {
+                uniform token info:id = "UsdPrimvarReader_float2"
+                token inputs:varname.connect = </Root/PBR_rainbow/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                float2 outputs:result
+            }
+        }
+
+        def Shader "opacity"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @Materials/rainbow.png@
+            float2 inputs:st.connect = </Root/PBR_rainbow/opacity/TexCoordReader.outputs:result>
+            float outputs:r
+
+            def Shader "TexCoordReader"
+            {
+                uniform token info:id = "UsdPrimvarReader_float2"
+                token inputs:varname.connect = </Root/PBR_rainbow/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                float2 outputs:result
+            }
+        }
+
+        def Shader "emissiveColor"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @Materials/rainbow.png@
+            float2 inputs:st.connect = </Root/PBR_rainbow/emissiveColor/TexCoordReader.outputs:result>
+            color3f outputs:rgb
+
+            def Shader "TexCoordReader"
+            {
+                uniform token info:id = "UsdPrimvarReader_float2"
+                token inputs:varname.connect = </Root/PBR_rainbow/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                float2 outputs:result
+            }
+        }
     }
 }
 
