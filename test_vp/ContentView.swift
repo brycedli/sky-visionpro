@@ -10,22 +10,25 @@ import RealityKit
 import RealityKitContent
 
 public enum SelectedButton {
-    case idea, draw, people
+    case idea, draw, people, start
 }
 
 struct ContentView: View {
     
-    @State private var selectedButton: SelectedButton? = .idea
+    @State private var selectedButton: SelectedButton? = .start
     @State private var range = 25.0;
     
     var body: some View {
-        SkyView()
+        Spacer()
+        
         HStack (alignment: .bottom){
             switch selectedButton {
             case .idea:
                 IntentView(range: $range)
             case .draw:
                 IntentView(range: $range).hidden()
+            case .start:
+                StartView(selectedButton: $selectedButton)
             default:
                 EmptyView()
             }
@@ -42,7 +45,9 @@ struct ContentView: View {
     
 }
 #Preview (windowStyle: .volumetric) {
+    
     ContentView()
+    
 }
 
 

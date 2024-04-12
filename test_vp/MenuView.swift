@@ -36,14 +36,14 @@ struct MenuView: View {
                 .padding(0)
                 .background(selectedButton == .people ? Color.secondary.opacity(0.5) : Color.clear)
                 .clipShape(Circle())
-            if selectedButton != .none {
+            if selectedButton != .none && selectedButton != .start {
                 Button(action: {
                     withAnimation{
                         selectedButton = .none
                     }
                 }, label: {
                     Text("Done")
-                }).transition(.asymmetric(insertion: .push(from: .trailing), removal: .opacity))
+                }).transition(.asymmetric(insertion: .push(from: .trailing).animation(.easeIn), removal: .opacity))
             }
             
             
