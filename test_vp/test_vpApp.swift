@@ -16,18 +16,20 @@ struct test_vpApp: App {
     
     var body: some Scene {
         
-//        WindowGroup(id: "Menu") {
-//            ContentView()
-//            
-//        }.windowStyle(.plain)
+        WindowGroup(id: "Menu") {
+            ContentView()
+            
+        }.windowStyle(.plain)
+//        ImmersiveSpace(id: "Sky") {
+//            SkyView()
+//        }.windowStyle(.volumetric).defaultSize(width: 1, height: 1, depth: 0.1, in: .meters).immersionStyle(selection: $portalImmersionStyle, in: .progressive)
         ImmersiveSpace(id: "Sky") {
             SkyView()
+            
         }.immersionStyle(selection: $portalImmersionStyle, in: .mixed)
-/*//
- ImmersiveSpace(id: "Sky") {
-     SkyView()
- }.windowStyle(.volumetric).defaultSize(width: 1, height: 1, depth: 0.1, in: .meters).immersionStyle(selection: $style, in: .progressive)
- */
+
+         
+ 
     }
     
 }

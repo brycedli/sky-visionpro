@@ -10,7 +10,8 @@ import SwiftUI
 struct StartView: View {
     @Binding  var selectedButton: SelectedButton?
 
-    @Environment(\.openWindow) private var openWindow
+    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+
     //
     
     var body: some View {
@@ -23,7 +24,10 @@ struct StartView: View {
                 .padding(.vertical, 8)
                 .frame(width: 270, alignment: .top)
             Button(action: {
-                openWindow(id: "Sky")
+                Task {
+                    await openImmersiveSpace(id: "Sky")
+                }
+                
                 withAnimation{
                     selectedButton = .none
                 }

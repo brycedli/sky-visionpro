@@ -21,6 +21,7 @@
 		16C5D7522B6173D2008D91E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C5D7512B6173D2008D91E0 /* Assets.xcassets */; };
 		16C5D7552B6173D2008D91E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C5D7542B6173D2008D91E0 /* Preview Assets.xcassets */; };
 		16C5D7602B6173D3008D91E0 /* test_vpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C5D75F2B6173D3008D91E0 /* test_vpTests.swift */; };
+		16CF4AA02BC9F3A000C105C2 /* portalBig.obj in Resources */ = {isa = PBXBuildFile; fileRef = 16CF4A9F2BC9F3A000C105C2 /* portalBig.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		16C5D7562B6173D2008D91E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16C5D75B2B6173D3008D91E0 /* test_vpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = test_vpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C5D75F2B6173D3008D91E0 /* test_vpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_vpTests.swift; sourceTree = "<group>"; };
+		16CF4A9F2BC9F3A000C105C2 /* portalBig.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = portalBig.obj; path = ../../../../Downloads/portalBig.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		16C5D7482B6173D0008D91E0 /* test_vp */ = {
 			isa = PBXGroup;
 			children = (
+				16CF4A9E2BC9F36200C105C2 /* Resources */,
 				166FB6A82B7AAB6B004FAD5B /* View */,
 				166FB6A42B7AA14C004FAD5B /* ViewModel */,
 				166FB6A12B7AA0D7004FAD5B /* Model */,
@@ -157,6 +160,14 @@
 				16C5D75F2B6173D3008D91E0 /* test_vpTests.swift */,
 			);
 			path = test_vpTests;
+			sourceTree = "<group>";
+		};
+		16CF4A9E2BC9F36200C105C2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				16CF4A9F2BC9F3A000C105C2 /* portalBig.obj */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16C5D7552B6173D2008D91E0 /* Preview Assets.xcassets in Resources */,
+				16CF4AA02BC9F3A000C105C2 /* portalBig.obj in Resources */,
 				16C5D7522B6173D2008D91E0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
