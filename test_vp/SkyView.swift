@@ -11,19 +11,21 @@ import RealityKitContent
 
 struct SkyView: View {
     let portal = Entity()
+    let rainbow = try! Entity.load(named: "Scene", in: realityKitContentBundle)
     
+        
     func expand (size: Float) {
-        var tTo = Transform(scale:SIMD3(repeating: size), rotation: portal.orientation, translation: portal.position)
+        let tTo = Transform(scale:SIMD3(repeating: size), rotation: portal.orientation, translation: portal.position)
         portal.move(to:tTo, relativeTo: nil, duration: 3, timingFunction: .default)
     }
     var body: some View {
         
         RealityView {
             content in
-//            let portal = Entity()
+
             let world = Entity()
             world.components[WorldComponent.self] = .init()
-            let skyBlue = UIColor(red: 53/255, green: 137/255, blue: 215/255, alpha: 1)
+            let skyBlue = UIColor(red: 212/255, green: 238/255, blue: 255/255, alpha: 1)
             let skyMaterial = UnlitMaterial(color: skyBlue)
             let skySphere = Entity()
             skySphere.components.set(ModelComponent(mesh: .generateSphere(radius: 1E3), materials: [skyMaterial]))
@@ -37,6 +39,12 @@ struct SkyView: View {
             portal.setScale(SIMD3(repeating: 0.001), relativeTo: nil)
             content.add(world)
             content.add(portal)
+            rainbow.transform = Transform(pitch: .pi/2 * -1, yaw: 0, roll: 0)
+            
+            rainbow.setScale(SIMD3(repeating: 8.8), relativeTo: nil)
+            portal.addChild(rainbow)
+            
+            rainbow.position.z -= 0.05
             Task {
                 expand (size: 1.2)
             }
