@@ -1,0 +1,347 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 1.0 (409.100.15)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def Material "cloud"
+    {
+        token outputs:mtlx:surface.connect = </Root/cloud/PBRSurface.outputs:out>
+        token outputs:realitykit:vertex.connect = </Root/cloud/GeometryModifier.outputs:out>
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (574.125, 45.871094)
+        float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 99)
+        int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 3
+
+        def Shader "GeometryModifier"
+        {
+            uniform token info:id = "ND_realitykit_geometrymodifier_vertexshader"
+            float3 inputs:bitangent
+            color4f inputs:color
+            float3 inputs:modelPositionOffset.connect = </Root/cloud/Fractal3D.outputs:out>
+            float3 inputs:normal
+            float4 inputs:userAttribute
+            half2 inputs:userAttributeHalf2_0
+            half2 inputs:userAttributeHalf2_1
+            half4 inputs:userAttributeHalf4_0
+            half4 inputs:userAttributeHalf4_1
+            half4 inputs:userAttributeHalf4_2
+            half4 inputs:userAttributeHalf4_3
+            float2 inputs:uv0
+            float2 inputs:uv1
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (334.92194, 218.3235)
+            float2 ui:nodegraph:node:size = (196.5, 325)
+            int ui:nodegraph:node:stackingOrder = 488
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = []
+        }
+
+        def Shader "Constant"
+        {
+            uniform token info:id = "ND_constant_float"
+            float inputs:value = 0.05
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-293.5937, 112.39772)
+            float2 ui:nodegraph:node:size = (141.5, 53)
+            int ui:nodegraph:node:stackingOrder = 498
+        }
+
+        def Shader "Position"
+        {
+            uniform token info:id = "ND_position_vector3"
+            string inputs:space
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-818.5261, -7.395207)
+            float2 ui:nodegraph:node:size = (133.5, 40)
+            int ui:nodegraph:node:stackingOrder = 488
+        }
+
+        def Shader "Constant_2"
+        {
+            uniform token info:id = "ND_constant_float"
+            float inputs:value = 30
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-360.12363, 297.80695)
+            float2 ui:nodegraph:node:size = (157.5, 53)
+            int ui:nodegraph:node:stackingOrder = 497
+        }
+
+        def Shader "Multiply"
+        {
+            uniform token info:id = "ND_multiply_vector3FA"
+            float3 inputs:in1.connect = </Root/cloud/TransformMatrix.outputs:out>
+            float inputs:in2.connect = </Root/cloud/Constant_2.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-157.4781, 254.28238)
+            float2 ui:nodegraph:node:size = (60, 36)
+            int ui:nodegraph:node:stackingOrder = 488
+        }
+
+        def Shader "Fractal3D"
+        {
+            uniform token info:id = "ND_fractal3d_vector3FA"
+            float inputs:amplitude.connect = </Root/cloud/Constant.outputs:out>
+            float inputs:diminish
+            float inputs:lacunarity
+            int inputs:octaves
+            float3 inputs:position.connect = </Root/cloud/Multiply.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (50.908264, 306.74554)
+            float2 ui:nodegraph:node:size = (130.5, 181)
+            int ui:nodegraph:node:stackingOrder = 488
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:lacunarity", "inputs:diminish"]
+        }
+
+        def Shader "GeometryModifierModelToWorld"
+        {
+            uniform token info:id = "ND_realitykit_geometry_modifier_model_to_world"
+            matrix4d outputs:modelToWorld
+            float2 ui:nodegraph:node:pos = (-834.6234, 294.4803)
+            float2 ui:nodegraph:node:size = (250, 81)
+            int ui:nodegraph:node:stackingOrder = 488
+        }
+
+        def Shader "TransformMatrix"
+        {
+            uniform token info:id = "ND_transformmatrix_vector3M4"
+            float3 inputs:in.connect = </Root/cloud/Position.outputs:out>
+            matrix4d inputs:mat.connect = </Root/cloud/GeometryModifierModelToWorld.outputs:modelToWorld>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-518.0613, 132.825)
+            float2 ui:nodegraph:node:size = (152.5, 127)
+            int ui:nodegraph:node:stackingOrder = 496
+        }
+
+        def Shader "DotProduct"
+        {
+            uniform token info:id = "ND_dotproduct_vector3"
+            float3 inputs:in1.connect = </Root/cloud/Normal.outputs:out>
+            float3 inputs:in2.connect = </Root/cloud/ViewDirection.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-261.7608, 29.549866)
+            float2 ui:nodegraph:node:size = (153.5, 53)
+            int ui:nodegraph:node:stackingOrder = 488
+        }
+
+        def Shader "ViewDirection"
+        {
+            uniform token info:id = "ND_realitykit_viewdirection_vector3"
+            string inputs:space
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-494.41315, 18.45221)
+            float2 ui:nodegraph:node:size = (210, 53)
+            int ui:nodegraph:node:stackingOrder = 488
+        }
+
+        def Shader "Normal"
+        {
+            uniform token info:id = "ND_normal_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-506.07205, -66.30597)
+            float2 ui:nodegraph:node:size = (128.5, 40)
+            int ui:nodegraph:node:stackingOrder = 488
+        }
+
+        def Shader "PBRSurface"
+        {
+            uniform token info:id = "ND_realitykit_pbr_surfaceshader"
+            float inputs:ambientOcclusion
+            color3f inputs:baseColor = (1, 1, 1) (
+                colorSpace = "srgb_displayp3"
+            )
+            color3f inputs:emissiveColor
+            float inputs:metallic
+            float3 inputs:normal
+            float inputs:opacity.connect = </Root/cloud/DotProduct.outputs:out>
+            float inputs:opacityThreshold
+            float inputs:roughness = 1
+            float inputs:specular
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (256.36597, -156.24202)
+            float2 ui:nodegraph:node:size = (167, 307)
+            int ui:nodegraph:node:stackingOrder = 500
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:opacityThreshold"]
+        }
+    }
+
+    def Sphere "Sphere" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/cloud> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            prepend token outputs:surface.connect = </Root/Sphere/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
+    def NodeGraph "NodeGraph" (
+        active = true
+    )
+    {
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (355.43442, 31.525496)
+        float2 ui:nodegraph:realitykit:subgraphOutputs:size = (104.5, 53)
+        int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 492
+
+        def Shader "UnlitSurface"
+        {
+            uniform token info:id = "ND_realitykit_unlit_surfaceshader"
+            bool inputs:hasPremultipliedAlpha
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (-16, 70.5)
+            float2 ui:nodegraph:node:size = (194.5, 181)
+            int ui:nodegraph:node:stackingOrder = 1
+        }
+
+        def Shader "TransformMatrix"
+        {
+            uniform token info:id = "ND_transformmatrix_vector3M4"
+            float3 inputs:in.connect = </Root/NodeGraph/Position.outputs:out>
+            matrix4d inputs:mat.connect = </Root/NodeGraph/GeometryModifierModelToWorld.outputs:modelToWorld>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1106.502, 221.71098)
+            float2 ui:nodegraph:node:size = (152.5, 127)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "DotProduct"
+        {
+            uniform token info:id = "ND_dotproduct_vector3"
+            float3 inputs:in1.connect = </Root/NodeGraph/Normal.outputs:out>
+            float3 inputs:in2.connect = </Root/NodeGraph/ViewDirection.outputs:out>
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-850.2014, 118.43585)
+            float2 ui:nodegraph:node:size = (153.5, 53)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "Multiply"
+        {
+            uniform token info:id = "ND_multiply_vector3FA"
+            float3 inputs:in1.connect = </Root/NodeGraph/TransformMatrix.outputs:out>
+            float inputs:in2.connect = </Root/NodeGraph/Constant_2.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-745.9187, 343.16837)
+            float2 ui:nodegraph:node:size = (60, 36)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "Position"
+        {
+            uniform token info:id = "ND_position_vector3"
+            string inputs:space
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1406.9668, 81.490776)
+            float2 ui:nodegraph:node:size = (133.5, 40)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "Normal"
+        {
+            uniform token info:id = "ND_normal_vector3"
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1094.5127, 22.580017)
+            float2 ui:nodegraph:node:size = (128.5, 40)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "GeometryModifierModelToWorld"
+        {
+            uniform token info:id = "ND_realitykit_geometry_modifier_model_to_world"
+            matrix4d outputs:modelToWorld
+            float2 ui:nodegraph:node:pos = (-1423.0641, 383.36627)
+            float2 ui:nodegraph:node:size = (250, 81)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "Fractal3D"
+        {
+            uniform token info:id = "ND_fractal3d_vector3FA"
+            float inputs:amplitude.connect = </Root/NodeGraph/Constant.outputs:out>
+            float inputs:diminish
+            float inputs:lacunarity
+            int inputs:octaves
+            float3 inputs:position.connect = </Root/NodeGraph/Multiply.outputs:out>
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-537.53235, 395.63153)
+            float2 ui:nodegraph:node:size = (130.5, 181)
+            int ui:nodegraph:node:stackingOrder = 491
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:lacunarity", "inputs:diminish"]
+        }
+
+        def Shader "ViewDirection"
+        {
+            uniform token info:id = "ND_realitykit_viewdirection_vector3"
+            string inputs:space
+            float3 outputs:out
+            float2 ui:nodegraph:node:pos = (-1082.8538, 107.338196)
+            float2 ui:nodegraph:node:size = (210, 53)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "Constant_2"
+        {
+            uniform token info:id = "ND_constant_float"
+            float inputs:value = 1
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-948.5643, 386.69293)
+            float2 ui:nodegraph:node:size = (157.5, 53)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "Constant"
+        {
+            uniform token info:id = "ND_constant_float"
+            float inputs:value = 0.1
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (-882.0343, 201.2837)
+            float2 ui:nodegraph:node:size = (141.5, 53)
+            int ui:nodegraph:node:stackingOrder = 491
+        }
+
+        def Shader "GeometryModifier"
+        {
+            uniform token info:id = "ND_realitykit_geometrymodifier_vertexshader"
+            float3 inputs:bitangent
+            color4f inputs:color
+            float3 inputs:modelPositionOffset.connect = </Root/NodeGraph/Fractal3D.outputs:out>
+            float3 inputs:normal
+            float4 inputs:userAttribute
+            half2 inputs:userAttributeHalf2_0
+            half2 inputs:userAttributeHalf2_1
+            half4 inputs:userAttributeHalf4_0
+            half4 inputs:userAttributeHalf4_1
+            half4 inputs:userAttributeHalf4_2
+            half4 inputs:userAttributeHalf4_3
+            float2 inputs:uv0
+            float2 inputs:uv1
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (-253.51869, 307.20947)
+            float2 ui:nodegraph:node:size = (196.5, 325)
+            int ui:nodegraph:node:stackingOrder = 491
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = []
+        }
+    }
+}
+

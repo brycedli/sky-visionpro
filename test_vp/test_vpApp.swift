@@ -10,7 +10,6 @@ import SwiftUI
 @main
 struct test_vpApp: App {
     @Environment(\.openWindow) private var openWindow
-    @State private var portalImmersionStyle: ImmersionStyle = .mixed
 
 //openWindow(id: "SecondWindow")
     
@@ -26,7 +25,7 @@ struct test_vpApp: App {
         ImmersiveSpace(id: "Sky") {
             SkyView()
             
-        }.immersionStyle(selection: $portalImmersionStyle, in: .mixed)
+        }.immersiveContentBrightness(.bright)
 
          
  
