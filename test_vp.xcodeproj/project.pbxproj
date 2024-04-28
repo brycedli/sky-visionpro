@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		160C7E022BC82D5800D942BE /* IntentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160C7E012BC82D5800D942BE /* IntentView.swift */; };
+		162B16A22BDD784B009CECA7 /* cloud_0.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 162B16A12BDD784B009CECA7 /* cloud_0.mp4 */; };
+		162B16A42BDDCAD6009CECA7 /* cloud_0_3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 162B16A32BDDCAD6009CECA7 /* cloud_0_3.mp4 */; };
+		162B16A62BDDD0A6009CECA7 /* cloud_0_5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 162B16A52BDDD0A6009CECA7 /* cloud_0_5.mp4 */; };
 		162FB1322BC8438500B9BA2D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FB1312BC8438500B9BA2D /* MenuView.swift */; };
 		162FB1342BC878EE00B9BA2D /* SkyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FB1332BC878EE00B9BA2D /* SkyView.swift */; };
 		162FB1622BC8943F00B9BA2D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FB1612BC8943F00B9BA2D /* StartView.swift */; };
@@ -55,6 +58,9 @@
 
 /* Begin PBXFileReference section */
 		160C7E012BC82D5800D942BE /* IntentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentView.swift; sourceTree = "<group>"; };
+		162B16A12BDD784B009CECA7 /* cloud_0.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cloud_0.mp4; sourceTree = "<group>"; };
+		162B16A32BDDCAD6009CECA7 /* cloud_0_3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cloud_0_3.mp4; sourceTree = "<group>"; };
+		162B16A52BDDD0A6009CECA7 /* cloud_0_5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cloud_0_5.mp4; sourceTree = "<group>"; };
 		162FB1312BC8438500B9BA2D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		162FB1332BC878EE00B9BA2D /* SkyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyView.swift; sourceTree = "<group>"; };
 		162FB1612BC8943F00B9BA2D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
@@ -203,6 +209,9 @@
 		16CF4A9E2BC9F36200C105C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				162B16A52BDDD0A6009CECA7 /* cloud_0_5.mp4 */,
+				162B16A32BDDCAD6009CECA7 /* cloud_0_3.mp4 */,
+				162B16A12BDD784B009CECA7 /* cloud_0.mp4 */,
 				16DB824D2BD622F20060C56A /* clouds */,
 				16DB823D2BD60CF00060C56A /* whitecloud.png */,
 				16DB823B2BD60B8C0060C56A /* cloud-lighter.png */,
@@ -333,14 +342,17 @@
 				16DB823C2BD60B8C0060C56A /* cloud-lighter.png in Resources */,
 				16DB82572BD622F20060C56A /* dusk-2.png in Resources */,
 				16DB825B2BD622F20060C56A /* dusk-6.png in Resources */,
+				162B16A22BDD784B009CECA7 /* cloud_0.mp4 in Resources */,
 				16DB82502BD622F20060C56A /* cloud-3.png in Resources */,
 				16DB82562BD622F20060C56A /* day-5.png in Resources */,
 				1647C6492BCD8F0B00C1B684 /* rainbow_4.png in Resources */,
 				16DB82552BD622F20060C56A /* day-4.png in Resources */,
 				1647C6472BCD88C900C1B684 /* sky.MOV in Resources */,
+				162B16A42BDDCAD6009CECA7 /* cloud_0_3.mp4 in Resources */,
 				16C5D7522B6173D2008D91E0 /* Assets.xcassets in Resources */,
 				16DB82522BD622F20060C56A /* dawn-5.png in Resources */,
 				16DB824E2BD622F20060C56A /* cloud-1.png in Resources */,
+				162B16A62BDDD0A6009CECA7 /* cloud_0_5.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
