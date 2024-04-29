@@ -7,7 +7,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["PBR_rainbow", "Cube_1", "PBR_rainbow_1", "Cube"]
+    reorder nameChildren = ["Cube_1", "Cube_2", "Cube_3", "PBR_rainbow_2_unlit"]
     rel material:binding = None (
         bindMaterialAs = "weakerThanDescendants"
     )
@@ -123,7 +123,8 @@ def Xform "Root"
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
-        rel material:binding = </Root/Cube_2/PBR_rainbow_1> (
+        reorder nameChildren = ["PBR_rainbow_1", "PBR_rainbow_2_unlit"]
+        rel material:binding = </Root/Cube_2/PBR_rainbow_2_unlit> (
             bindMaterialAs = "weakerThanDescendants"
         )
         double size = 0.2
@@ -222,6 +223,144 @@ def Xform "Root"
                 }
             }
         }
+
+        def Material "PBR_rainbow_2_unlit"
+        {
+            token inputs:frame:stPrimvarName = "st" (
+                customData = {
+                    dictionary realitykit = {
+                        float2 positionInSubgraph = (-148.76953, -60.445312)
+                        float2 sizeInSubgraph = (203.5, 53)
+                        int stackingOrderInSubgraph = 11
+                    }
+                }
+            )
+            token outputs:mtlx:surface.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UnlitSurface.outputs:out>
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.outputs:surface>
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (109.72656, 195.84375)
+            float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 99)
+            int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 4
+
+            def Shader "UsdPreviewSurface" (
+                active = false
+            )
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1) (
+                    colorSpace = "srgb_displayp3"
+                )
+                color3f inputs:emissiveColor.connect = </Root/Cube_2/PBR_rainbow_2_unlit/emissiveColor.outputs:rgb>
+                float inputs:occlusion = 0
+                float inputs:opacity.connect = </Root/Cube_2/PBR_rainbow_2_unlit/opacity.outputs:r>
+                float inputs:opacityThreshold
+                float inputs:roughness = 1
+                token outputs:surface
+            }
+
+            def Shader "diffuseColor"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @Materials/rainbow_3.png@
+                float2 inputs:st.connect = </Root/Cube_2/PBR_rainbow_2_unlit/diffuseColor/TexCoordReader.outputs:result>
+                color3f outputs:rgb
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+
+            def Shader "opacityThreshold"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @Materials/rainbow.png@
+                float2 inputs:st.connect = </Root/Cube_2/PBR_rainbow_2_unlit/opacityThreshold/TexCoordReader.outputs:result>
+                float outputs:r
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+
+            def Shader "opacity"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @Materials/rainbow_3_a.png@
+                float2 inputs:st.connect = </Root/Cube_2/PBR_rainbow_2_unlit/opacity/TexCoordReader.outputs:result>
+                float outputs:r
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+
+            def Shader "emissiveColor"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @Materials/rainbow_3_a.png@
+                float2 inputs:st.connect = </Root/Cube_2/PBR_rainbow_2_unlit/emissiveColor/TexCoordReader.outputs:result>
+                color3f outputs:rgb
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+
+            def Shader "UnlitSurface"
+            {
+                uniform token info:id = "ND_realitykit_unlit_surfaceshader"
+                bool inputs:applyPostProcessToneMap = 0
+                color3f inputs:color.connect = </Root/Cube_2/PBR_rainbow_2_unlit/Image_1.outputs:out>
+                bool inputs:hasPremultipliedAlpha = 0
+                float inputs:opacity = 0.9
+                float inputs:opacity.connect = </Root/Cube_2/PBR_rainbow_2_unlit/Image.outputs:out>
+                float inputs:opacityThreshold
+                token outputs:out
+                float2 ui:nodegraph:node:pos = (-132.7207, 70.30469)
+                float2 ui:nodegraph:node:size = (194.5, 181)
+                int ui:nodegraph:node:stackingOrder = 142
+                string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:opacity", "inputs:opacityThreshold"]
+            }
+
+            def Shader "Image"
+            {
+                uniform token info:id = "ND_image_float"
+                asset inputs:file = @Materials/rainbow_3_alpha.png@
+                string inputs:filtertype
+                string inputs:uaddressmode
+                string inputs:vaddressmode
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (-673.1187, 170.05023)
+                float2 ui:nodegraph:node:size = (148.5, 199)
+                int ui:nodegraph:node:stackingOrder = 139
+            }
+
+            def Shader "Image_1"
+            {
+                uniform token info:id = "ND_image_color3"
+                asset inputs:file = @Materials/rainbow_3_alpha.png@
+                string inputs:filtertype
+                string inputs:uaddressmode
+                string inputs:vaddressmode
+                color3f outputs:out
+                float2 ui:nodegraph:node:pos = (-486.8312, 50.686836)
+                float2 ui:nodegraph:node:size = (148.5, 199)
+                int ui:nodegraph:node:stackingOrder = 140
+                string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:uaddressmode", "inputs:default", "inputs:file"]
+            }
+        }
     }
 
     def Cube "Cube_3" (
@@ -229,7 +368,8 @@ def Xform "Root"
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
-        rel material:binding = </Root/Cube_3/PBR_rainbow_1> (
+        reorder nameChildren = ["PBR_rainbow_2_unlit", "PBR_rainbow_1"]
+        rel material:binding = </Root/Cube_3/PBR_rainbow_2_unlit> (
             bindMaterialAs = "weakerThanDescendants"
         )
         double size = 0.2
@@ -326,6 +466,144 @@ def Xform "Root"
                     token inputs:varname.connect = </Root/Cube_3/PBR_rainbow_1/UsdPreviewSurface.inputs:frame:stPrimvarName>
                     float2 outputs:result
                 }
+            }
+        }
+
+        def Material "PBR_rainbow_2_unlit"
+        {
+            token inputs:frame:stPrimvarName = "st" (
+                customData = {
+                    dictionary realitykit = {
+                        float2 positionInSubgraph = (-148.76953, -60.445312)
+                        float2 sizeInSubgraph = (203.5, 53)
+                        int stackingOrderInSubgraph = 11
+                    }
+                }
+            )
+            token outputs:mtlx:surface.connect = </Root/Cube_3/PBR_rainbow_2_unlit/UnlitSurface.outputs:out>
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.outputs:surface>
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (109.72656, 195.84375)
+            float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 99)
+            int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 4
+
+            def Shader "UsdPreviewSurface" (
+                active = false
+            )
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1) (
+                    colorSpace = "srgb_displayp3"
+                )
+                color3f inputs:emissiveColor.connect = </Root/Cube_2/PBR_rainbow_2_unlit/emissiveColor.outputs:rgb>
+                float inputs:occlusion = 0
+                float inputs:opacity.connect = </Root/Cube_2/PBR_rainbow_2_unlit/opacity.outputs:r>
+                float inputs:opacityThreshold
+                float inputs:roughness = 1
+                token outputs:surface
+            }
+
+            def Shader "diffuseColor"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @Materials/rainbow_3.png@
+                float2 inputs:st.connect = </Root/Cube_3/PBR_rainbow_2_unlit/diffuseColor/TexCoordReader.outputs:result>
+                color3f outputs:rgb
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+
+            def Shader "opacityThreshold"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @Materials/rainbow.png@
+                float2 inputs:st.connect = </Root/Cube_3/PBR_rainbow_2_unlit/opacityThreshold/TexCoordReader.outputs:result>
+                float outputs:r
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+
+            def Shader "opacity"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @Materials/rainbow_3_a.png@
+                float2 inputs:st.connect = </Root/Cube_3/PBR_rainbow_2_unlit/opacity/TexCoordReader.outputs:result>
+                float outputs:r
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+
+            def Shader "emissiveColor"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @Materials/rainbow_3_a.png@
+                float2 inputs:st.connect = </Root/Cube_3/PBR_rainbow_2_unlit/emissiveColor/TexCoordReader.outputs:result>
+                color3f outputs:rgb
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Cube_2/PBR_rainbow_2_unlit/UsdPreviewSurface.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+
+            def Shader "UnlitSurface"
+            {
+                uniform token info:id = "ND_realitykit_unlit_surfaceshader"
+                bool inputs:applyPostProcessToneMap = 0
+                color3f inputs:color.connect = </Root/Cube_3/PBR_rainbow_2_unlit/Image_1.outputs:out>
+                bool inputs:hasPremultipliedAlpha = 0
+                float inputs:opacity = 0.9
+                float inputs:opacity.connect = </Root/Cube_3/PBR_rainbow_2_unlit/Image.outputs:out>
+                float inputs:opacityThreshold
+                token outputs:out
+                float2 ui:nodegraph:node:pos = (-132.7207, 70.30469)
+                float2 ui:nodegraph:node:size = (194.5, 181)
+                int ui:nodegraph:node:stackingOrder = 121
+                string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:opacity", "inputs:opacityThreshold"]
+            }
+
+            def Shader "Image"
+            {
+                uniform token info:id = "ND_image_float"
+                asset inputs:file = @Materials/rainbow_3_b.png@
+                string inputs:filtertype
+                string inputs:uaddressmode
+                string inputs:vaddressmode
+                float outputs:out
+                float2 ui:nodegraph:node:pos = (-673.1187, 170.05023)
+                float2 ui:nodegraph:node:size = (148.5, 199)
+                int ui:nodegraph:node:stackingOrder = 137
+            }
+
+            def Shader "Image_1"
+            {
+                uniform token info:id = "ND_image_color3"
+                asset inputs:file = @Materials/rainbow_3_b.png@
+                string inputs:filtertype
+                string inputs:uaddressmode
+                string inputs:vaddressmode
+                color3f outputs:out
+                float2 ui:nodegraph:node:pos = (-486.8312, 50.686836)
+                float2 ui:nodegraph:node:size = (148.5, 199)
+                int ui:nodegraph:node:stackingOrder = 137
+                string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:uaddressmode", "inputs:default", "inputs:file"]
             }
         }
     }

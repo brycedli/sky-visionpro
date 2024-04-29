@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		160C7E022BC82D5800D942BE /* IntentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160C7E012BC82D5800D942BE /* IntentView.swift */; };
+		1623E6692BDEE66C006390A0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1623E6682BDEE66C006390A0 /* ViewModel.swift */; };
 		162B16A22BDD784B009CECA7 /* cloud_0.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 162B16A12BDD784B009CECA7 /* cloud_0.mp4 */; };
 		162B16A42BDDCAD6009CECA7 /* cloud_0_3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 162B16A32BDDCAD6009CECA7 /* cloud_0_3.mp4 */; };
 		162B16A62BDDD0A6009CECA7 /* cloud_0_5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 162B16A52BDDD0A6009CECA7 /* cloud_0_5.mp4 */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		160C7E012BC82D5800D942BE /* IntentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentView.swift; sourceTree = "<group>"; };
+		1623E6682BDEE66C006390A0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		162B16A12BDD784B009CECA7 /* cloud_0.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cloud_0.mp4; sourceTree = "<group>"; };
 		162B16A32BDDCAD6009CECA7 /* cloud_0_3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cloud_0_3.mp4; sourceTree = "<group>"; };
 		162B16A52BDDD0A6009CECA7 /* cloud_0_5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cloud_0_5.mp4; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				166FB6A52B7AA167004FAD5B /* ColorStringsViewModel.swift */,
+				1623E6682BDEE66C006390A0 /* ViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				166FB6AC2B7AAE10004FAD5B /* ColorView.swift in Sources */,
 				162FB1622BC8943F00B9BA2D /* StartView.swift in Sources */,
 				162FB1322BC8438500B9BA2D /* MenuView.swift in Sources */,
+				1623E6692BDEE66C006390A0 /* ViewModel.swift in Sources */,
 				160C7E022BC82D5800D942BE /* IntentView.swift in Sources */,
 				166FB6A32B7AA0F3004FAD5B /* ColorString.swift in Sources */,
 				16C5D7502B6173D0008D91E0 /* ContentView.swift in Sources */,

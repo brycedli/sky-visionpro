@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct IntentView: View {
-    @Binding var range: Double
+//    @Binding var range: Double
+    @State var viewModel: ViewModel
+    
     var body: some View {
         VStack (alignment: .center, spacing: 12) {
             VStack(alignment: .center, spacing: 2) {
@@ -21,9 +23,9 @@ struct IntentView: View {
             
             Divider().tint(Color.white)
             Slider(
-                value: $range,
-                in: 0...100,
-                step: 25
+                value: $viewModel.sliderValue,
+                in: 0...1
+//                step: 0.25
             )
             HStack{
                 Text("Challenge")

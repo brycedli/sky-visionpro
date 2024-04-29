@@ -18,15 +18,17 @@ struct ContentView: View {
     @State private var selectedButton: SelectedButton? = .start
     @State private var range = 25.0;
     
+    @State var viewModel: ViewModel
+    
     var body: some View {
         Spacer()
         
         HStack (alignment: .bottom){
             switch selectedButton {
             case .idea:
-                IntentView(range: $range)
+                IntentView(viewModel: viewModel)
             case .draw:
-                IntentView(range: $range).hidden()
+                IntentView(viewModel: viewModel).hidden()
             case .start:
                 StartView(selectedButton: $selectedButton)
             default:
@@ -44,10 +46,6 @@ struct ContentView: View {
     }
     
 }
-#Preview (windowStyle: .volumetric) {
-    
-    ContentView()
-    
-}
+
 
 

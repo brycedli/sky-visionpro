@@ -10,27 +10,21 @@ import SwiftUI
 @main
 struct test_vpApp: App {
     @Environment(\.openWindow) private var openWindow
-
-//openWindow(id: "SecondWindow")
+    @State var viewModel = ViewModel()
     
     var body: some Scene {
         
         WindowGroup(id: "Menu") {
-            ContentView()
+            ContentView(viewModel: viewModel)
             
         }.windowStyle(.plain)
-//        ImmersiveSpace(id: "Sky") {
-//            SkyView()
-//        }.windowStyle(.volumetric).defaultSize(width: 1, height: 1, depth: 0.1, in: .meters).immersionStyle(selection: $portalImmersionStyle, in: .progressive)
+
         ImmersiveSpace(id: "Sky") {
-            SkyView()
+            SkyView(viewModel: viewModel)
+            /*.environmentObject(skyState)*/
             
         }.immersiveContentBrightness(.bright)
-
-         
- 
     }
-    
 }
 
 
