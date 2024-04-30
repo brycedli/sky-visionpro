@@ -9,8 +9,8 @@ import Foundation
 
 @Observable
 class ViewModel {
-    var sliderValue: Float = 0.0
-    
+    var sliderValue: Float = 0.5
+    var spaceVisible: Bool = false
     init() {
 
     }

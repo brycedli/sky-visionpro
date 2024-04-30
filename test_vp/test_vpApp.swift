@@ -20,11 +20,21 @@ struct test_vpApp: App {
         }.windowStyle(.plain)
 
         ImmersiveSpace(id: "Sky") {
-            SkyView(viewModel: viewModel)
+            SkyView(gestureModel: GestureModelContainer.gestureModel, viewModel: viewModel)
             /*.environmentObject(skyState)*/
             
         }.immersiveContentBrightness(.bright)
+        
+        
+//        WindowGroup(id: "Drawing") {
+//            DrawingView()
+//        }.windowStyle(.volumetric).defaultSize(width: 0.2, height: 0.2, depth: 0.2, in: .meters)
+        
     }
 }
 
 
+@MainActor
+enum GestureModelContainer {
+    private(set) static var gestureModel = GestureModel()
+}

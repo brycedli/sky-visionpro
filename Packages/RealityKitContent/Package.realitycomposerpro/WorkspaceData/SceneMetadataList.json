@@ -12,7 +12,7 @@
       [
         "0A9B4653-B11E-4D6A-850E-C6FCB621626C",
         "Root",
-        "Sphere"
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -21,7 +21,7 @@
       [
         "0A9B4653-B11E-4D6A-850E-C6FCB621626C",
         "Root",
-        "GridMaterial"
+        "Sphere"
       ],
       {
         "isExpanded" : true,
@@ -44,25 +44,16 @@
       [
         "26DBAE76-5DD8-47B6-A085-1B4ADA111097",
         "Root",
-        "Cube_2"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "26DBAE76-5DD8-47B6-A085-1B4ADA111097",
-        "Root",
-        "Cube_1"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "26DBAE76-5DD8-47B6-A085-1B4ADA111097",
-        "Root",
         "Cube_3"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "26DBAE76-5DD8-47B6-A085-1B4ADA111097",
+        "Root",
+        "Cube_2"
       ],
       {
         "isExpanded" : true,
@@ -81,6 +72,15 @@
         "Root",
         "Cube_2",
         "PBR_rainbow_2_unlit"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "26DBAE76-5DD8-47B6-A085-1B4ADA111097",
+        "Root",
+        "Cube_1"
       ],
       {
         "isExpanded" : true,
@@ -110,7 +110,7 @@
       [
         "4203E9A4-2CED-4546-B71B-C93B79972671",
         "Root",
-        "NodeGraph"
+        "cloud"
       ],
       {
         "isExpanded" : true,
@@ -127,7 +127,7 @@
       [
         "4203E9A4-2CED-4546-B71B-C93B79972671",
         "Root",
-        "cloud"
+        "NodeGraph"
       ],
       {
         "isExpanded" : true,
@@ -148,6 +148,37 @@
       },
       [
         "191165EB-0AD5-4FB5-AEE7-A93033086EA3",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "F5DF5229-5690-4E22-AD96-659B5FE4C224" : {
+    "objectMetadataList" : [
+      [
+        "F5DF5229-5690-4E22-AD96-659B5FE4C224",
+        "Root",
+        "plane"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "F5DF5229-5690-4E22-AD96-659B5FE4C224",
+        "Root",
+        "plane",
+        "cat"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "F5DF5229-5690-4E22-AD96-659B5FE4C224",
         "Root"
       ],
       {
